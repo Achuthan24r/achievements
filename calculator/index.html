@@ -38,6 +38,7 @@
         margin: 0 0 18px;
         font-size: 2.3rem;
         letter-spacing: 0.04em;
+        text-align: center;
       }
 
       .calculator {
@@ -51,13 +52,21 @@
 
       .inputs {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
         gap: 16px;
+        margin-bottom: 22px;
+      }
+
+      .buttons {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
         margin-bottom: 18px;
       }
 
       input[type='number'],
-      input[type='text'] {
+      input[type='text'],
+      input[type='button'] {
         width: 100%;
         border: none;
         border-radius: 16px;
@@ -81,17 +90,9 @@
         transform: translateY(-1px);
       }
 
-      .buttons {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 12px;
-        margin-bottom: 18px;
-      }
-
       input[type='button'] {
-        width: 72px;
-        padding: 14px 0;
+        width: 100%;
+        padding: 16px 18px;
         border: none;
         border-radius: 18px;
         font-size: 1.1rem;
@@ -120,24 +121,34 @@
     </style>
 </head>
 <body>
+  <div class="calculator">
     <h1>Calculator</h1>
-    <input type="number" id="num1" placeholder="First number">
-    <input type="number" id="num2" placeholder="Second number">
-    <br>
-    <input type="button" value="+" onclick="calculate('+')">
-    <input type="button" value="-" onclick="calculate('-')">
-    <input type="button" value="*" onclick="calculate('*')">
-    <input type="button" value="/" onclick="calculate('/')">
-    <br>
+    <div class="inputs">
+      <input type="number" id="num1" placeholder="First number">
+      <input type="number" id="num2" placeholder="Second number">
+    </div>
+    <div class="buttons">
+      <input type="button" value="+" onclick="calculate('+')">
+      <input type="button" value="-" onclick="calculate('-')">
+      <input type="button" value="*" onclick="calculate('*')">
+      <input type="button" value="/" onclick="calculate('/')">
+      <input type="button" value="Clear" onclick="clearResult()">
+    </div>
     <input type="text" id="result" placeholder="Result" disabled>
+    
+  </div>
 
     <script>
+      function clearResult() {
+        document.getElementById('num1').value = '';
+        document.getElementById('num2').value = '';
+        document.getElementById('result').value = '';
+      }
 
-      
-          function calculate(operator) {
-            const num1 = parseFloat(document.getElementById('num1').value);
-            const num2 = parseFloat(document.getElementById('num2').value);
-            let result;
+      function calculate(operator) {
+        const num1 = parseFloat(document.getElementById('num1').value);
+        const num2 = parseFloat(document.getElementById('num2').value);
+        let result;
 
             switch (operator) {
               case '+':
@@ -162,7 +173,6 @@
 
             document.getElementById('result').value = result;
           }
-        
 
     </script>
 </body>
