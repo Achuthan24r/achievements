@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #12131b;
+        --panel: #1f2030;
+        --panel-strong: #2f3146;
+        --text: #f3f4ff;
+        --muted: #9aa2d6;
+        --accent: #65b2ff;
+        --accent-strong: #2d8cff;
+        --shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: radial-gradient(circle at top, rgba(100, 150, 255, 0.2), transparent 35%),
+                    linear-gradient(180deg, #0f1020 0%, #12131b 100%);
+        color: var(--text);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      h1 {
+        margin: 0 0 18px;
+        font-size: 2.3rem;
+        letter-spacing: 0.04em;
+      }
+
+      .calculator {
+        width: min(420px, 92vw);
+        padding: 28px 32px;
+        border-radius: 28px;
+        background: linear-gradient(135deg, rgba(31, 32, 48, 0.96), rgba(39, 41, 62, 0.96));
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .inputs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 18px;
+      }
+
+      input[type='number'],
+      input[type='text'] {
+        width: 100%;
+        border: none;
+        border-radius: 16px;
+        padding: 16px 18px;
+        font-size: 1rem;
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--text);
+        outline: none;
+        transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      input[type='number']::placeholder,
+      input[type='text']::placeholder {
+        color: var(--muted);
+      }
+
+      input[type='number']:focus,
+      input[type='text']:focus {
+        background: rgba(255, 255, 255, 0.12);
+        box-shadow: 0 0 0 4px rgba(101, 178, 255, 0.12);
+        transform: translateY(-1px);
+      }
+
+      .buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      input[type='button'] {
+        width: 72px;
+        padding: 14px 0;
+        border: none;
+        border-radius: 18px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: white;
+        background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+        cursor: pointer;
+        box-shadow: 0 16px 30px rgba(45, 140, 255, 0.22);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      input[type='button']:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 22px 34px rgba(45, 140, 255, 0.28);
+      }
+
+      #result {
+        width: 100%;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.04);
+        padding: 16px 18px;
+        font-size: 1rem;
+        color: var(--text);
+        letter-spacing: 0.02em;
+      }
+    </style>
+</head>
+<body>
+    <h1>Calculator</h1>
+    <input type="number" id="num1" placeholder="First number">
+    <input type="number" id="num2" placeholder="Second number">
+    <br>
+    <input type="button" value="+" onclick="calculate('+')">
+    <input type="button" value="-" onclick="calculate('-')">
+    <input type="button" value="*" onclick="calculate('*')">
+    <input type="button" value="/" onclick="calculate('/')">
+    <br>
+    <input type="text" id="result" placeholder="Result" disabled>
+
+    <script>
+
+      
+          function calculate(operator) {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            let result;
+
+            switch (operator) {
+              case '+':
+                result = num1 + num2;
+                break;
+              case '-':
+                result = num1 - num2;
+                break;
+              case '*':
+                result = num1 * num2;
+                break;
+              case '/':
+                if (num2 !== 0) {
+                  result = num1 / num2;
+                } else {
+                  result = 'Error: Division by zero';
+                }
+                break;
+              default:
+                result = 'Invalid operator';
+            }
+
+            document.getElementById('result').value = result;
+          }
+        
+
+    </script>
+</body>
+</html>
